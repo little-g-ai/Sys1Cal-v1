@@ -1,0 +1,13 @@
+models:
+  - name: jev_noul
+    adapter: jev_noul
+    model: jev-latest
+  - name: jev_choice
+    adapter: jev
+    model: jev-latest
+  - name: jev_score
+    adapter: jev_score
+    model: jev-latest
+
+evaluation:
+  repeats: 10

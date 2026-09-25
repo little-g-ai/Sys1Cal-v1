@@ -1,0 +1,27 @@
+benchmark:
+  version: "0.1.0"
+  seed: 42
+
+dataset:
+  preset: "dev"
+  families:
+    - explicit_probability
+    - frequency
+    - compound
+    - conditional
+    - bayes
+    - sequential_bayes
+
+evaluation:
+  repeats: 1
+  kl_epsilon: 1.0e-12
+  save_raw_responses: true
+
+models:
+  - name: oracle
+    adapter: mock
+    strategy: oracle
+  - name: uniform
+    adapter: mock
+    strategy: uniform
+

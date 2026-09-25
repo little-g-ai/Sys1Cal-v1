@@ -1,0 +1,4 @@
+test,n_latents,mean,ci95_low_normal,ci95_high_normal,t_stat,p_normal_approx
+score_expectation_global_lambda_bootstrap,92,0.978,0.789,1.0,,
+score_expectation_latent_lambda_positive,92,0.8209891304347827,0.7597314155098712,0.8822468453596942,26.26834346701676,
+score_expectation_identity_to_lambda_ambiguity_abs_error_improvement,92,0.11017541112684244,0.08528671927655895,0.13506410297712593,8.676382314812239,

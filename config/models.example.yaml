@@ -1,0 +1,18 @@
+models:
+  - name: oracle
+    adapter: mock
+    strategy: oracle
+  - name: uniform
+    adapter: mock
+    strategy: uniform
+  - name: jev
+    adapter: jev
+    endpoint_env: JEV_API_URL
+    api_key_env: JEV_API_KEY
+    model: jev-latest
+  - name: semif_qwen35_4b
+    adapter: semif
+    command: semif-score
+    mode: direct
+    model: Qwen/Qwen3.5-4B
+    revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a

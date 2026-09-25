@@ -1,0 +1,26 @@
+# Secrets and local configuration
+.env
+*.env
+
+# Python environments and caches
+.venv/
+.venv-*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Model/cache/dependency payloads not suitable for git
+.hf_cache/
+.local_debs/
+vendor/
+
+# LaTeX/build byproducts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# OS/editor noise
+.DS_Store

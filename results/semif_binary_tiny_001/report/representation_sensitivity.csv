@@ -1,0 +1,2 @@
+model,mean_pairwise_tv,mean_max_tv,ris,mean_gold_relative_gap
+semif_qwen35_4b,0.11744562643375231,0.19364969331057735,0.8825543735662477,0.18012483308439273

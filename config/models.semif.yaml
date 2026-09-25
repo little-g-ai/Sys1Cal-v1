@@ -1,0 +1,13 @@
+models:
+  - name: semif_qwen35_4b
+    adapter: semif
+    command: /home/porcedda/Desktop/JEV/.venv-semif/bin/semif-score
+    mode: direct
+    model: Qwen/Qwen3.5-4B
+    revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+    env:
+      CPATH: /home/porcedda/Desktop/JEV/.local_debs/python312/usr/include:/home/porcedda/Desktop/JEV/.local_debs/python312/usr/include/python3.12:/home/porcedda/Desktop/JEV/.local_debs/python312/usr/include/aarch64-linux-gnu/python3.12
+      CFLAGS: -I/home/porcedda/Desktop/JEV/.local_debs/python312/usr/include -I/home/porcedda/Desktop/JEV/.local_debs/python312/usr/include/python3.12 -I/home/porcedda/Desktop/JEV/.local_debs/python312/usr/include/aarch64-linux-gnu/python3.12
+
+evaluation:
+  repeats: 1

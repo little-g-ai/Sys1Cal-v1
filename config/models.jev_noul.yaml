@@ -1,0 +1,8 @@
+models:
+  - name: jev_noul
+    adapter: jev_noul
+    api_key_env: JEV_API_KEY
+    model: jev-latest
+
+evaluation:
+  repeats: 10
