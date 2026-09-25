@@ -1,14 +1,14 @@
-# JevCal
+# Sys1Cal
 
-JevCal is a benchmark for probability fidelity and semantic evaluation of Jev-like typed decision models. It asks a narrow question: when the correct probability is exactly specified by the input state, does a model recover that probability, preserve it across equivalent representations, and expose compatible semantics through Noul, Choice, and Score?
+Sys1Cal is a benchmark for probability fidelity and semantic evaluation of Jev-like typed decision models. It asks a narrow question: when the correct probability is exactly specified by the input state, does a model recover that probability, preserve it across equivalent representations, and expose compatible semantics through Noul, Choice, and Score?
 
 The benchmark is fixed. Models should adapt to the released JSONL contract, not the other way around.
 
-## What JevCal Measures
+## What Sys1Cal Measures
 
-JevCal complements JevBench rather than replacing it. JevBench is a broad typed-decision benchmark: it evaluates useful decision behavior across tasks such as routing, judging, policy checks, classification, ordinal scoring, validity, latency, cost, Brier score, and top-label calibration.
+Sys1Cal complements JevBench rather than replacing it. JevBench is a broad typed-decision benchmark: it evaluates useful decision behavior across tasks such as routing, judging, policy checks, classification, ordinal scoring, validity, latency, cost, Brier score, and top-label calibration.
 
-JevCal is narrower and more semantic. It procedurally constructs probability problems where the true distribution is known exactly, renders the same latent problem in multiple equivalent forms, and compares typed primitives on the same proposition. This exposes failures that can be invisible to ordinary argmax accuracy.
+Sys1Cal is narrower and more semantic. It procedurally constructs probability problems where the true distribution is known exactly, renders the same latent problem in multiple equivalent forms, and compares typed primitives on the same proposition. This exposes failures that can be invisible to ordinary argmax accuracy.
 
 The benchmark focuses on:
 
@@ -33,20 +33,20 @@ The benchmark is not a hand-labeled natural-language dataset. Its reliability co
 
 ## Fixed Releases
 
-Use the release files under [datasets/releases](datasets/releases) for comparable results.
+Use the generated release files under [datasets/generated](datasets/generated) for comparable results.
 
-- `v0.1.0_dev.jsonl`: 2,600 rendered exact-probability items for ordinary probability-recovery experiments.
-- `v0.1.0_parallel_primitives_dev.jsonl`: 365 binary truth-status items with one shared state/proposition and parallel `queries.noul`, `queries.choice`, and `queries.score` definitions.
+- `v0.1.0_tiny_cleanvars_binary.jsonl`: 365 binary truth-status items for Choice-like and binary probability-recovery experiments.
+- `v0.1.0_tiny_cleanvars_parallel_primitives.jsonl`: 365 binary truth-status items with one shared state/proposition and parallel `queries.noul`, `queries.choice`, and `queries.score` definitions.
 
-The parallel primitive release is the core JevCal contract for comparing Noul-like, Choice-like, and Score-like responses. If you publish results, report the dataset filename, SHA-256 hash, model config, repeat count, and report artifact directory.
+The parallel primitive release is the core Sys1Cal contract for comparing Noul-like, Choice-like, and Score-like responses. If you publish results, report the dataset filename, model config, repeat count, and report artifact directory.
 
 ## Noul, Choice, And Score
 
-JevCal treats the three primitives as distinct response types:
+Sys1Cal treats the three primitives as distinct response types:
 
 - **Noul-like**: returns one scalar probability that a proposition is true. In binary evaluation this becomes `{"True": p, "False": 1 - p}`.
 - **Choice-like**: returns a categorical distribution over explicit options, usually `False` and `True` in the parallel primitive benchmark.
-- **Score-like**: returns a distribution over ordered truth levels. JevCal evaluates the expected normalized truth value, using levels `j / 9` for `j = 0,...,9`, while preserving the full Score distribution for semantic analyses.
+- **Score-like**: returns a distribution over ordered truth levels. Sys1Cal evaluates the expected normalized truth value, using levels `j / 9` for `j = 0,...,9`, while preserving the full Score distribution for semantic analyses.
 
 ## Question Representations
 
@@ -144,39 +144,6 @@ Reports write `benchmark_summary.csv` when built from a result directory. The in
 
 Rows are reported separately for `noul_like`, `choice_like`, and `score_like` responses, plus an optional `overall` row. TV/MAE remains the primary probability-recovery metric in the detailed tables.
 
-## Main Paper Findings
-
-The bundled paper draft is [Paper/AISTATS2027PaperPack/jevcal_paper.tex](Paper/AISTATS2027PaperPack/jevcal_paper.tex), titled **"JevCal: A Benchmark for Calibration and Semantic Evaluation of Jev-like Models"**. The repo-level benchmark summary now uses pointwise probability fidelity as the core probability metric.
-
-In the development run reported there, 365 rendered binary items were queried 10 times per primitive. The main findings were:
-
-- Noul recovered exact event probabilities best: mean TV was `0.0817`.
-- Score expectation was close to Noul but weaker: mean TV was `0.1139`.
-- Binary Choice was much worse and systematically more True-heavy: mean TV was `0.2362`, with mean `Choice - Noul` probability `0.179`.
-- Score expectation was far closer to Noul than to Choice.
-- Choice also showed the largest representation sensitivity.
-- A descriptive power-law mapping and a Score-derived unknown-mass model explained much of the Noul/Choice/Score mismatch, but those analyses are research appendices, not the core benchmark score.
-
-## Power-Law And Unknown-Mass Experiments
-
-The power-law transformation and unknown-mass theory are included because they were built to study the semantics of Jev specifically. They are not the JevCal leaderboard definition.
-
-The Python experiments live in:
-
-- [src/jev_prob_bench/evaluation/noul_choice_score.py](src/jev_prob_bench/evaluation/noul_choice_score.py)
-- [src/jev_prob_bench/reporting/report.py](src/jev_prob_bench/reporting/report.py)
-
-The generated report writes CSVs such as:
-
-- `noul_choice_calibration.csv`
-- `score_unknown_mass_summary.csv`
-- `score_three_state_summary.csv`
-- `score_choice_tuf_summary.csv`
-- `choice_from_score_recovery.csv`
-- `powerlaw_calibration.csv`
-
-See [docs/SEMANTIC_EXPERIMENTS.md](docs/SEMANTIC_EXPERIMENTS.md) for the interpretation boundary: these experiments are black-box behavioral descriptions, not claims about model internals.
-
 ## Quick Start
 
 Install test/report dependencies:
@@ -189,7 +156,7 @@ Run the fixed parallel primitive benchmark with mock baselines:
 
 ```bash
 PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli run \
-  --dataset datasets/releases/v0.1.0_parallel_primitives_dev.jsonl \
+  --dataset datasets/generated/v0.1.0_tiny_cleanvars_parallel_primitives.jsonl \
   --models config/benchmark.yaml \
   --output results/run_001
 
@@ -205,7 +172,7 @@ export JEV_API_KEY="..."
 export JEV_API_URL="https://api.typesafe.ai/v1/systemone"
 
 PYTHONPATH=src .venv/bin/python scripts/run_jev_parallel_primitives.py \
-  --dataset datasets/releases/v0.1.0_parallel_primitives_dev.jsonl \
+  --dataset datasets/generated/v0.1.0_tiny_cleanvars_parallel_primitives.jsonl \
   --output results/jev_parallel_v0.1.0_dev \
   --repeats 10 \
   --parallelism 16
