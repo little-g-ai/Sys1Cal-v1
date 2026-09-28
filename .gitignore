@@ -24,3 +24,5 @@ vendor/
 
 # OS/editor noise
 .DS_Store
+# Local project notes/specs
+jev_probability_benchmark_agent_spec.md
