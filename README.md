@@ -223,21 +223,9 @@ PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli report \
   --output results/jev_semif_combined_10x_001/report
 ```
 
-## Development
-
-Generate a non-release dataset:
-
-```bash
-PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli generate \
-  --config config/benchmark.yaml \
-  --preset tiny \
-  --output datasets/generated/v0.1.0_tiny.jsonl
+## How to cite
+arXiv preprint is on the way. In the meantime, you can find the full-text here:
+```text
+https://www.researchgate.net/publication/414897214_Jev_thinks_I_don't_know_but_doesn't_say_it_Introducing_Sys1Cal-v1_Dataset_for_Probability_Calibration
 ```
 
-Run tests:
-
-```bash
-PYTHONPATH=src .venv/bin/python -m pytest
-```
-
-The default config runs `oracle` and `uniform`. The oracle baseline should produce zero TV error; if it does not, the benchmark pipeline is wrong.
