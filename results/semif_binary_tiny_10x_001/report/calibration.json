@@ -1,0 +1,77 @@
+{
+  "bins": [
+    {
+      "count": 28,
+      "empirical_frequency": 0.7857142857142857,
+      "hi": 0.1,
+      "lo": 0.0,
+      "mean_predicted": 0.058408569225552195
+    },
+    {
+      "count": 16,
+      "empirical_frequency": 0.5625,
+      "hi": 0.2,
+      "lo": 0.1,
+      "mean_predicted": 0.13291748130862327
+    },
+    {
+      "count": 13,
+      "empirical_frequency": 0.7692307692307693,
+      "hi": 0.3,
+      "lo": 0.2,
+      "mean_predicted": 0.24333468862967944
+    },
+    {
+      "count": 10,
+      "empirical_frequency": 0.7,
+      "hi": 0.4,
+      "lo": 0.3,
+      "mean_predicted": 0.3462914314649562
+    },
+    {
+      "count": 13,
+      "empirical_frequency": 0.6923076923076923,
+      "hi": 0.5,
+      "lo": 0.4,
+      "mean_predicted": 0.42378784019375115
+    },
+    {
+      "count": 20,
+      "empirical_frequency": 0.2,
+      "hi": 0.6,
+      "lo": 0.5,
+      "mean_predicted": 0.5619016497846558
+    },
+    {
+      "count": 12,
+      "empirical_frequency": 0.3333333333333333,
+      "hi": 0.7,
+      "lo": 0.6,
+      "mean_predicted": 0.6509083234348622
+    },
+    {
+      "count": 56,
+      "empirical_frequency": 0.5178571428571429,
+      "hi": 0.8,
+      "lo": 0.7,
+      "mean_predicted": 0.7638836090220753
+    },
+    {
+      "count": 85,
+      "empirical_frequency": 0.47058823529411764,
+      "hi": 0.9,
+      "lo": 0.8,
+      "mean_predicted": 0.8521365743885878
+    },
+    {
+      "count": 112,
+      "empirical_frequency": 0.6785714285714286,
+      "hi": 1.0,
+      "lo": 0.9,
+      "mean_predicted": 0.9551979467679738
+    }
+  ],
+  "ece": 0.35436319730022764,
+  "empirical_brier": 0.3646943845381007,
+  "empirical_log_loss": 1.099251836980001
+}

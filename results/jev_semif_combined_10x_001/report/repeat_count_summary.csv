@@ -1,0 +1,5 @@
+model,n_items,min_repeats,median_repeats,max_repeats,mean_repeats
+jev_choice,365,10,10,10,10.0
+jev_noul,365,10,10,10,10.0
+jev_score,365,10,10,10,10.0
+semif_qwen35_4b,365,10,10,10,10.0

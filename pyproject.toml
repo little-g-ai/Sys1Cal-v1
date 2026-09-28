@@ -8,12 +8,15 @@ version = "0.1.0"
 description = "Procedural probability-recovery benchmark for black-box decision models."
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.7",
+    "PyYAML>=6",
+]
 
 [project.optional-dependencies]
-dev = ["pytest>=7", "matplotlib>=3.7", "pyyaml>=6"]
+dev = ["pytest>=7"]
 plots = ["matplotlib>=3.7"]
-yaml = ["pyyaml>=6"]
+yaml = ["PyYAML>=6"]
 
 [project.scripts]
 jev-prob-bench = "jev_prob_bench.cli:main"

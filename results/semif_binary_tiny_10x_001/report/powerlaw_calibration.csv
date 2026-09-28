@@ -1,0 +1,2 @@
+model,n,alpha,identity_mae,power_mae_to_returned,inverse_calibrated_mae,identity_rmse,power_rmse_to_returned,inverse_calibrated_rmse
+semif_qwen35_4b,365,21.200000000000003,0.37079586099853484,0.28209855920589283,0.47068646499827416,0.4505637089722236,0.4044820881395869,0.5510580874608838

@@ -29,7 +29,7 @@ The benchmark is not a hand-labeled natural-language dataset. Its reliability co
 - latent consistency checks requiring all representations of the same latent item to share the same gold distribution;
 - oracle baseline checks, where the oracle must have zero TV error;
 - pytest coverage for generators, renderers, adapters, metrics, repeat aggregation, Noul/Choice/Score analysis, and report generation;
-- release row counts and SHA-256 hashes in [datasets/releases/MANIFEST.md](datasets/releases/MANIFEST.md).
+- fixed release JSONL files under [datasets/generated](datasets/generated), which are the canonical inputs for the reports in this repository.
 
 ## Fixed Releases
 
@@ -149,7 +149,8 @@ Rows are reported separately for `noul_like`, `choice_like`, and `score_like` re
 Install test/report dependencies:
 
 ```bash
-.venv/bin/python -m pip install -e ".[dev]"
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
 ```
 
 Run the fixed parallel primitive benchmark with mock baselines:
@@ -180,6 +181,46 @@ PYTHONPATH=src .venv/bin/python scripts/run_jev_parallel_primitives.py \
 PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli report \
   --results results/jev_parallel_v0.1.0_dev \
   --output results/jev_parallel_v0.1.0_dev/report
+```
+
+
+Run SemIf as a Choice-like baseline. The checked-in SemIf config uses CUDA and 10 repeats:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli run \
+  --dataset datasets/generated/v0.1.0_tiny_cleanvars_binary.jsonl \
+  --models config/models.semif.yaml \
+  --output results/semif_binary_tiny_10x_001 \
+  --repeats 10
+
+PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli report \
+  --results results/semif_binary_tiny_10x_001 \
+  --output results/semif_binary_tiny_10x_001/report
+```
+
+Build the combined Jev + SemIf report used for cross-model plots such as `figure_3_representation_sensitivity.png`:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+
+inputs = [
+    Path('results/jev_parallel_tiny_10x_parallel_002/results.jsonl'),
+    Path('results/semif_binary_tiny_10x_001/results.jsonl'),
+]
+out = Path('results/jev_semif_combined_10x_001')
+out.mkdir(parents=True, exist_ok=True)
+with (out / 'results.jsonl').open('w', encoding='utf-8') as dst:
+    for path in inputs:
+        with path.open('r', encoding='utf-8') as src:
+            for line in src:
+                if line.strip():
+                    dst.write(line)
+PY
+
+PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli report \
+  --results results/jev_semif_combined_10x_001 \
+  --output results/jev_semif_combined_10x_001/report
 ```
 
 ## Development

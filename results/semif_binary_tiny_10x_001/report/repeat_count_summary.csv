@@ -1,0 +1,2 @@
+model,n_items,min_repeats,median_repeats,max_repeats,mean_repeats
+semif_qwen35_4b,365,10,10,10,10.0

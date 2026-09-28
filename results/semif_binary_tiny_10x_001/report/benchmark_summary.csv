@@ -1,0 +1,2 @@
+model,response_type,n,argmax_accuracy,pointwise_probability_fidelity,mean_tv_error,noul_choice_r2,noul_score_r2,score_choice_r2
+semif_qwen35_4b,overall,365,0.4849315068493151,0.6292041390014651,0.37079586099853484,,,

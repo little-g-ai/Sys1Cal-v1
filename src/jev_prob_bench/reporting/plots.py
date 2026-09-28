@@ -9,9 +9,10 @@ from jev_prob_bench.evaluation.noul_choice_score import build_ncs_records, choic
 
 
 PRIMITIVE_STYLES = {
-    "jev_noul": {"label": "Noul", "color": "tab:blue", "marker": "o", "linestyle": "-"},
-    "jev_choice": {"label": "Choice", "color": "tab:orange", "marker": "s", "linestyle": "--"},
-    "jev_score": {"label": "Score", "color": "tab:green", "marker": "^", "linestyle": "-."},
+    "jev_noul": {"label": r"Jev-$\mathtt{Noul}$", "color": "tab:blue", "marker": "o", "linestyle": "-"},
+    "jev_choice": {"label": r"Jev-$\mathtt{Choice}$", "color": "tab:orange", "marker": "s", "linestyle": "--"},
+    "jev_score": {"label": r"Jev-$\mathtt{Score}$", "color": "tab:green", "marker": "^", "linestyle": "-."},
+    "semif_qwen35_4b": {"label": r"SemIf-$\mathtt{Choice}$", "color": "tab:purple", "marker": "D", "linestyle": ":"},
 }
 
 
@@ -92,7 +93,7 @@ def _transfer_curve(plt, rows, output: Path):
     ax.plot([0, 1], [0, 1], color="black", linewidth=1, linestyle="--")
     ax.set_xlabel("True P(proposition)")
     ax.set_ylabel("Returned P(proposition)")
-    ax.set_title("Probability Transfer: all JevCal families")
+    ax.set_title("Probability Transfer: all Sys1Cal families")
     ax.grid(True, alpha=0.2)
     ax.legend(title="Primitive", frameon=False)
     path = output / "figure_1_probability_transfer.png"
@@ -209,11 +210,11 @@ def _error_by_representation(plt, rows, output: Path):
         values = [sum(grouped[(model, rep)]) / len(grouped[(model, rep)]) if grouped[(model, rep)] else 0.0 for rep in representations]
         ax.bar([x + offset for x in base], values, width=width, color=style["color"], label=style["label"], alpha=0.85)
     ax.set_ylabel("Mean TV error")
-    ax.set_title("Representation Sensitivity by Jev Primitive")
+    ax.set_title("Representation Sensitivity by Model-Primitive")
     ax.set_xticks(base)
     ax.set_xticklabels(representations, rotation=30, ha="right")
-    ax.grid(axis="y", alpha=0.2)
-    ax.legend(title="Primitive", frameon=False)
+    ax.grid(axis="y", alpha=0.1)
+    ax.legend(frameon=True)
     path = output / "figure_3_representation_sensitivity.png"
     fig.savefig(path, bbox_inches="tight", dpi=150)
     plt.close(fig)
@@ -434,21 +435,19 @@ def _ncs_consistency_scatter(plt, records, output: Path):
 
 
 def _ncs_score_expectation_scatter(plt, records, output: Path):
-    fig, axes = plt.subplots(1, 3, figsize=(13, 4.2), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(13, 3.5), sharex=True, sharey=True)
     comparisons = [
         ("p_star", "Ground truth P(A)"),
         ("p_noul", "Noul P(A)"),
-        ("p_choice", "Choice P(True)"),
+        ("p_choice", "Choice P(A)"),
     ]
     for ax, (key, label) in zip(axes, comparisons):
         ax.scatter([record[key] for record in records], [record["mu_score"] for record in records], s=18, alpha=0.65, color="tab:green")
-        ax.plot([0, 1], [0, 1], color="black", linewidth=1)
-        ax.set_title(label)
+        ax.plot([0, 1], [0, 1], color="black", linewidth=1, linestyle="--")
         ax.set_xlabel(label)
         ax.grid(True, alpha=0.2)
-    axes[0].set_ylabel("Score expectation mu_S")
-    fig.suptitle("Score Expectation Compared with Gold, Noul, and Choice")
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
+    axes[0].set_ylabel(r"Score expectation $\mu_s$")
+    fig.tight_layout()
     path = output / "figure_8_score_expectation_connections.png"
     fig.savefig(path, bbox_inches="tight", dpi=150)
     plt.close(fig)
