@@ -1,5 +1,8 @@
 # Sys1Cal
 
+![image](results/jev_semif_combined_10x_001/report/figures/figure_8_score_expectation_connections.png)
+
+
 Sys1Cal is a benchmark for probability fidelity and semantic evaluation of Jev-like typed decision models. It asks a narrow question: when the correct probability is exactly specified by the input state, does a model recover that probability, preserve it across equivalent representations, and expose compatible semantics through Noul, Choice, and Score?
 
 The benchmark is fixed. Models should adapt to the released JSONL contract, not the other way around.
@@ -224,8 +227,16 @@ PYTHONPATH=src .venv/bin/python -m jev_prob_bench.cli report \
 ```
 
 ## How to cite
-arXiv preprint is on the way. In the meantime, you can find the full-text here:
-```text
-https://www.researchgate.net/publication/414897214_Jev_thinks_I_don't_know_but_doesn't_say_it_Introducing_Sys1Cal-v1_Dataset_for_Probability_Calibration
+```bibtex
+@misc{porcedda2026sys1cal,
+  title = {Jev thinks "I don't know", but doesn't say it: Introducing Sys1Cal-v1 Dataset for Probability Calibration},
+  author = {Riccardo Porcedda},
+  year = {2026},
+  eprint = {2609.35342},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.AI},
+  doi = {10.48550/arXiv.2609.35342},
+  url = {https://arxiv.org/abs/2609.35342}
+}
 ```
 
