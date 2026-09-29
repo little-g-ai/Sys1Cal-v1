@@ -5,13 +5,12 @@
 
 Sys1Cal is a benchmark for probability fidelity and semantic evaluation of Jev-like typed decision models. It asks a narrow question: when the correct probability is exactly specified by the input state, does a model recover that probability, preserve it across equivalent representations, and expose compatible semantics through Noul, Choice, and Score?
 
-The benchmark is fixed. Models should adapt to the released JSONL contract, not the other way around.
+Find us also on [![Hugging Face](https://img.shields.io/badge/-HuggingFace-3B4252?style=flat&logo=huggingface&logoColor=)](https://huggingface.co/datasets/RPorcedda/Sys1Cal-v1)
+
 
 ## What Sys1Cal Measures
 
-Sys1Cal complements JevBench rather than replacing it. JevBench is a broad typed-decision benchmark: it evaluates useful decision behavior across tasks such as routing, judging, policy checks, classification, ordinal scoring, validity, latency, cost, Brier score, and top-label calibration.
-
-Sys1Cal is narrower and more semantic. It procedurally constructs probability problems where the true distribution is known exactly, renders the same latent problem in multiple equivalent forms, and compares typed primitives on the same proposition. This exposes failures that can be invisible to ordinary argmax accuracy.
+Sys1Cal procedurally constructs probability problems where the true distribution is known exactly, renders the same latent problem in multiple equivalent forms, and compares typed primitives on the same proposition. This exposes failures that can be invisible to ordinary argmax accuracy.
 
 The benchmark focuses on:
 
@@ -22,7 +21,7 @@ The benchmark focuses on:
 
 ## How The Benchmark Was Created
 
-The first implementation, generators, report code, and paper draft were created with Codex GPT-5.5 High under human direction. The dataset is synthetic and procedural: each item is generated from Python code with exact latent parameters, then rendered into JSONL.
+The dataset is synthetic and procedural: each item is generated from Python code with exact latent parameters, then rendered into JSONL.
 
 The benchmark is not a hand-labeled natural-language dataset. Its reliability comes from deterministic construction and checks:
 
