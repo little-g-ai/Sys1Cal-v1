@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use Sys1Cal-v1, please cite the arXiv preprint."
+title: "Jev thinks \"I don't know\", but doesn't say it: Introducing Sys1Cal-v1 Dataset for Probability Calibration"
+authors:
+  - family-names: Porcedda
+    given-names: Riccardo
+doi: 10.48550/arXiv.2609.35342
+url: "https://arxiv.org/abs/2609.35342"
+date-released: 2026-09-28

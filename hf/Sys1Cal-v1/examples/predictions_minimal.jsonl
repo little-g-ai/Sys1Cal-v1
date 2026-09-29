@@ -1,0 +1,2 @@
+{"instance_id":"explicit_probability__seed_000042__repr_direct__parallel_primitives","model":"example_model","response_type":"choice","distribution":{"False":0.98,"True":0.02}}
+{"instance_id":"explicit_probability__seed_000042__repr_ratio__parallel_primitives","model":"example_model","response_type":"noul","probability_true":0.02}
